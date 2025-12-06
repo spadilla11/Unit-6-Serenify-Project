@@ -28,10 +28,3 @@ def normalize_quizapi_question(raw):
         'difficulty': difficulty,
         'api_source': 'quizapi'
     }
-
-def import_questions(subject, amount=5):
-    raw_questions = fetch_quizapi_questions(subject, amount)
-    
-    for raw in raw_questions:
-        normalized = normalize_quizapi_question(raw)
-        Question.objects.create(**normalized)
