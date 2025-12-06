@@ -8,7 +8,7 @@ from django.conf import settings
 from django.contrib.auth.decorators import *
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .forms import *
-
+import random
 
 
 
@@ -45,17 +45,10 @@ def login_view(request:HttpRequest):
     return render(request, 'login.html', {'form':form})
 
 
-def sessions_view(request: HttpRequest) -> HttpResponse:
-    return render(request, 'sessions.html')
-
-
 def logout_view(request):
     logout(request)
     return redirect('landing')
 
-def login_view(request: HttpRequest) -> HttpResponse:
-    # Logic for logging in the user
-    return redirect('home')
 
 @login_required
 def profile_view(request: HttpRequest) -> HttpResponse:
