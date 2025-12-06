@@ -13,6 +13,8 @@ import random
 
 
 
+
+
 # Create your views here.
 def landing_view(request: HttpRequest) -> HttpResponse:
     return render(request, 'landing.html')

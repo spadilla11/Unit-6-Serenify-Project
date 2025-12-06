@@ -9,7 +9,5 @@ def fetch_quizapi_questions(subject, amount):
         "X-Api-Key": QUIZAPI_TOKEN
     }
     response = requests.get(url, headers=headers)
-    print("Status code:", response.status_code)
-    print("Raw response:", response.text)
     data = response.json()
     return data
