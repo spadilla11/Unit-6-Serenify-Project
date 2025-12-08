@@ -1,16 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http.response import HttpResponse
 from django.http.request import HttpRequest
-<<<<<<< HEAD
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login, logout
-from .forms import *
-from .models import *
-
-# Create your views here.
-def landing_view(request:HttpRequest)->HttpResponse:
-    return render (request, "landing.html")
-=======
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from .models import *
@@ -19,8 +9,6 @@ from django.contrib.auth.decorators import *
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .forms import *
 import random
-
-
 
 
 
@@ -34,7 +22,9 @@ def register_view(request):
         if request.method == 'POST':
             form = RegistrationForm(request.POST)
             if form.is_valid():
-                form.save()
+                user = form.save()
+                UserStats.objects.create(user=user)
+                login(request, user)
                 return redirect('login')
         else:
             form = RegistrationForm()
@@ -68,4 +58,3 @@ def profile_view(request: HttpRequest) -> HttpResponse:
 
 def home_view(request: HttpRequest) -> HttpResponse:
     return render(request, 'home.html')
->>>>>>> 30463dd28f21a0d83453535e54132fc52a71487a
