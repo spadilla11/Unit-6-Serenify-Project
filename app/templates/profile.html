@@ -4,8 +4,15 @@
 
 {% block content %}
 
+    <h1>Profile</h1>
 
+    {%for name in userstats%}
+        <p>stat: {{userstat}}</p>
+    {%endfor%}
 
+    <p>{{name}}</p>
+    <p>{{level}}</p>
+    <p>{{userstats.label_tag}}</p>
+    
 
-
-{% endblock %}
+{% endblock content%}

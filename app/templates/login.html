@@ -3,9 +3,14 @@
 
 
 {% block content %}
+<h1>Login Page</h1>
+    <form method="POST" class="content2">
+        {% csrf_token %}
+        <input type="text" id="username" class="input" placeholder="Username" name="username" required>
+        <input type="password" id="password" class="input" placeholder="Password" name="password" required>
+        <button type="submit" class="button">login</button>
+        <a href="{%url 'register'%}" class="link" style="font-size:12px;">Don't have an account? Register Here.</a>
+    </form>
 
 
-
-
-
-{% endblock %}
+{% endblock content %}

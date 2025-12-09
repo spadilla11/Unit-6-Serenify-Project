@@ -1,19 +1,11 @@
-<<<<<<< HEAD
 {%extends 'base.html'%}
 {%load static%}
     {%block content%}
 
+    <h1>Landing Page</h1>
+    <a href="{%url 'register'%}" class="link" style="font-size:12px;">SignUp</a>
+    <a href="{%url 'login'%}" class="link" style="font-size:12px;">Login</a>
+    <a href="{%url 'profile'%}" class="link" style="font-size:12px;">Profile</a>
+
+
     {%endblock content%}
-=======
-{% extends "base.html" %}
-{% load static %}
-
-
-{% block content %}
-
-
-
-
-
-{% endblock %}
->>>>>>> 30463dd28f21a0d83453535e54132fc52a71487a
