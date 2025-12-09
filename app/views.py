@@ -8,8 +8,7 @@ from django.conf import settings
 from django.contrib.auth.decorators import *
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .forms import *
-import random
-
+# import random
 
 
 
@@ -23,13 +22,12 @@ def register_view(request):
             form = RegistrationForm(request.POST)
             if form.is_valid():
                 user = form.save()
-                UserStats.objects.create(user=user)
+                UserStats.objects.create(user=user, level=level, xp=xp,)
                 login(request, user)
                 return redirect('login')
         else:
             form = RegistrationForm()
         return render(request, 'registration.html', {'form': form})
-
 
 
 def login_view(request:HttpRequest):
@@ -47,14 +45,21 @@ def login_view(request:HttpRequest):
     return render(request, 'login.html', {'form':form})
 
 
-def logout_view(request):
+def logout_view(request:HttpRequest)->HttpResponse:
     logout(request)
     return redirect('landing')
 
 
-@login_required
+def user_stats(request:HttpRequest)->HttpResponse:
+    pass
+
 def profile_view(request: HttpRequest) -> HttpResponse:
-    return render(request, 'profile.html')
+    userstats = UserStats.objects.all()
+    return render(request, 'profile.html', {'userstats':userstats})
 
 def home_view(request: HttpRequest) -> HttpResponse:
     return render(request, 'home.html')
+
+
+
+

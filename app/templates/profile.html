@@ -4,8 +4,12 @@
 
 {% block content %}
 
+    <h1>Profile</h1>
 
+    <!-- {%for userstat in userstats%}
+        <p>{{userstat}}</p>
+    {%endfor%} -->
+    <p>{{userstats.user}}</p>
+    <p>{{userstats.label_tag}}</p>
 
-
-
-{% endblock %}
+{% endblock content%}
