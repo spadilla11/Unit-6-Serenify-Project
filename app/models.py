@@ -18,48 +18,54 @@ class Question(models.Model):
 
 class UserStats(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    xp = models.IntegerField()
-    level = models.IntegerField()
-    streak = models.IntegerField()
-    total_time_studying = models.IntegerField()
-
+    xp = models.IntegerField(default=0)
+    level = models.IntegerField(default=0)
+    streak = models.IntegerField(default=0)
+    total_time_studying = models.IntegerField(default=0)
 
     def __str__(self):
         return f"{self.user.username} Stats"
 
-class StudyRoom(models.model):
-    room_type = models.CharField(max_length=25)
-    current_timer = models.IntegerField()
+
+class StudyRoom(models.Model):
+    room_types = [('solo', 'Solo'),
+                ('duel', 'Duel'),
+                ('group', 'Group'),
+                ('private', 'Private')]
+    name = models.CharField(max_length=25)
+    type_of_room = models.CharField(max_length=20, choices=room_types)
+    current_timer = models.IntegerField(default=0)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
-    participants = models.ManyToManyField(User, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    # participants = models.ManyToManyField(User)
     
     def __str__(self):
         return f"{self.room_type} Study Room"
 
 
-class StudySession(models.model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    room = models.CharField(max_length=25)
-    minutes = models.IntegerField()
-    date = models.DateTimeField()
-    xp_earned = UserStats.xp()
+class StudySession(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    room = models.ForeignKey(StudyRoom, on_delete=models.CASCADE)
+    minutes = models.IntegerField(default=0)
+    date = models.DateTimeField(auto_now_add=True)
+    xp_earned = models.IntegerField(default=0)
     
     def __str__(self):
         return f"{self.room} Study Session"
 
 
-class Task(models.model):
+class Task(models.Model):
     title = models.CharField(max_length=25)
-    subject = models.CharField()
-    due_date = models.DateField()
-    status = models.CharField()
+    subject = models.CharField(max_length=25)
+    due_date = models.DateField(null=True, blank=True)
     progress = models.IntegerField()
+    complete = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.title} Task"
 
 
-class Flashcard(models.model):
+class Flashcard(models.Model):
     subject = models.CharField(max_length=25)
     question = models.TextField(max_length=300)
     answer = models.TextField(max_length=200)
@@ -70,9 +76,13 @@ class Flashcard(models.model):
         return f"{self.subject} Flashcard"
 
 
-class Achievement(models.model):
+class Achievement(models.Model):
     name = models.CharField(max_length=25)
     xp_reward = models.PositiveIntegerField()
     
     def __str__(self):
         return f"{self.name} Achievement"
+
+
+class UserProfile(models.Model):
+    pass
