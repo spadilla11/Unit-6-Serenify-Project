@@ -13,8 +13,6 @@ import random
 
 
 
-
-
 # Create your views here.
 def landing_view(request: HttpRequest) -> HttpResponse:
     return render(request, 'landing.html')
@@ -24,7 +22,9 @@ def register_view(request):
         if request.method == 'POST':
             form = RegistrationForm(request.POST)
             if form.is_valid():
-                form.save()
+                user = form.save()
+                UserStats.objects.create(user=user)
+                login(request, user)
                 return redirect('login')
         else:
             form = RegistrationForm()
