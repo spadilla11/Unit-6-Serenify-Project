@@ -6,10 +6,13 @@
 
     <h1>Profile</h1>
 
-    <!-- {%for userstat in userstats%}
-        <p>{{userstat}}</p>
-    {%endfor%} -->
-    <p>{{userstats.user}}</p>
+    {%for name in userstats%}
+        <p>stat: {{userstat}}</p>
+    {%endfor%}
+
+    <p>{{name}}</p>
+    <p>{{level}}</p>
     <p>{{userstats.label_tag}}</p>
+    
 
 {% endblock content%}
