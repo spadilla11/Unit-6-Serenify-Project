@@ -1,3 +1,4 @@
+from urllib import request
 from django.shortcuts import render, redirect
 from django.http.response import HttpResponse
 from django.http.request import HttpRequest
@@ -21,8 +22,7 @@ def register_view(request):
             if form.is_valid():
                 user = form.save()
                 UserStats.objects.create(user=user)
-                login(request, user)
-                return redirect('login')
+                return redirect('home')
         else:
             form = RegistrationForm()
         return render(request, 'registration.html', {'form': form})
@@ -52,10 +52,10 @@ def user_stats(request:HttpRequest)->HttpResponse:
     pass
 
 def profile_view(request: HttpRequest) -> HttpResponse:
-    userstats = UserStats.objects.get_or_create(user = request.user)
+    userstats= UserStats.objects.get_or_create(user=request.user)
     name = request.user.username
-    level = request.userstats.level
-    return render(request, 'profile.html', {'name':name, 'level': level, 'userstats' : userstats})
+    level = userstats[0].level
+    return render(request, 'profile.html', {'name':name, 'level': level, 'userstats' : userstats[0]})
 
 def home_view(request: HttpRequest) -> HttpResponse:
     return render(request, 'home.html')
