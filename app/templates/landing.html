@@ -1,11 +1,17 @@
 {%extends 'base.html'%}
 {%load static%}
     {%block content%}
+    <body style="text-align: center;">
+        <h1>Landing Page</h1>
+        <div>
+        <ul class="navbar">
+            <li><a href="{%url 'register'%}" class="link">SignUp</a></li>
+            <li><a href="{%url 'profile'%}" class="link">Profile</a></li>
+            <li><a href="{%url 'landing'%}" class="link">Landing</a></li>
+            <li><a href="{%url 'login'%}" class="btn">Login</a></li>
 
-    <h1>Landing Page</h1>
-    <a href="{%url 'register'%}" class="link" style="font-size:12px;">SignUp</a>
-    <a href="{%url 'login'%}" class="link" style="font-size:12px;">Login</a>
-    <a href="{%url 'profile'%}" class="link" style="font-size:12px;">Profile</a>
+        </ul>
+    </div>
 
-
+    </body>
     {%endblock content%}
