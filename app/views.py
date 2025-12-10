@@ -10,8 +10,6 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .forms import *
 # import random
 
-
-
 # Create your views here.
 def landing_view(request: HttpRequest) -> HttpResponse:
     return render(request, 'landing.html')
@@ -56,9 +54,8 @@ def user_stats(request:HttpRequest)->HttpResponse:
 def profile_view(request: HttpRequest) -> HttpResponse:
     userstats = UserStats.objects.get_or_create(user = request.user)
     name = request.user.username
-    level = userstats[0].level
-    xp = userstats[0].xp
-    return render(request, 'profile.html', {'name':name, 'level':level, 'xp':xp, 'stats': userstats[0]})
+    level = request.userstats.level
+    return render(request, 'profile.html', {'name':name, 'level': level, 'userstats' : userstats})
 
 def home_view(request: HttpRequest) -> HttpResponse:
     return render(request, 'home.html')
