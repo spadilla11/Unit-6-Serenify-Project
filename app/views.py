@@ -54,10 +54,10 @@ def user_stats(request:HttpRequest)->HttpResponse:
     pass
 
 def profile_view(request: HttpRequest) -> HttpResponse:
-    userstats = UserStats.objects.get_or_create(user = request.user)
+    # userstats = UserStats.objects.get_or_create(user = request.user)
+    stats = request.user.userstats
     name = request.user.username
-    level = request.userstats.level
-    return render(request, 'profile.html', {'name':name, 'level': level, 'userstats' : userstats})
+    return render(request, 'profile.html', {'name':name, 'stats' : stats})
 
 def home_view(request: HttpRequest) -> HttpResponse:
     return render(request, 'home.html')

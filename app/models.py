@@ -24,7 +24,7 @@ class UserStats(models.Model):
     total_time_studying = models.IntegerField(default=0)
 
     def __str__(self):
-        return f"{self.user.user} Stats"
+        return f"{self.User} Stats"
 
 
 class StudyRoom(models.Model):
