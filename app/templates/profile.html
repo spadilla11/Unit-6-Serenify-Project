@@ -6,13 +6,14 @@
 
     <h1>Profile</h1>
 
-    {%for name in userstats%}
-        <p>stat: {{userstat}}</p>
-    {%endfor%}
 
-    <p>{{name}}</p>
-    <p>{{level}}</p>
-    <p>{{userstats.label_tag}}</p>
+    <p>username: {{user.username}}</p>
+    <p>name: {{user.first_name}}</p>
+    <p>last name: {{user.last_name}}</p>
+    <p>level: {{stats.level}}</p>
+    <p>xp: {{stats.xp}}</p>
+    <p>streak: {{stats.streak}}</p>
+    <p>total time studied: {{stats.total_time_studying}}</p>
     
 
 {% endblock content%}
